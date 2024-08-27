@@ -1,0 +1,48 @@
+class Pila:
+    def __init__(self):
+        self.items = []
+
+    def apilar(self, elemento):
+        self.items.append(elemento)
+
+    def desapilar(self):
+        if not self.esta_vacia():
+            return self.items.pop()
+        else:
+            print("La pila está vacía")
+
+    def esta_vacia(self):
+        return len(self.items) == 0
+
+    def imprimir(self):
+        print("Contenido de la pila:")
+        for elemento in self.items:
+            print(elemento)
+
+def separar_pares_impares(pila_original):
+    pila_pares = Pila()
+    pila_impares = Pila()
+
+    while not pila_original.esta_vacia():
+        numero = pila_original.desapilar()
+        if numero % 2 == 0:
+            pila_pares.apilar(numero)
+        else:
+            pila_impares.apilar(numero)
+
+    return pila_pares, pila_impares
+
+#Ejemplo de uso
+mi_pila_original = Pila()
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+for num in numeros:
+    mi_pila_original.apilar(num)
+
+pila_pares_resultante, pila_impares_resultante = separar_pares_impares(mi_pila_original)
+
+print("Pila de números pares:")
+pila_pares_resultante.imprimir()
+
+print("\nPila de números impares:")
+pila_impares_resultante.imprimir()
+
