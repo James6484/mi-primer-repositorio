@@ -1,0 +1,32 @@
+class Pila:
+    def __init__(self):
+        self.items = []
+
+    def apilar(self, elemento):
+        self.items.append(elemento)
+
+    def desapilar(self):
+        if not self.esta_vacia():
+            return self.items.pop()
+        else:
+            print("La pila está vacía")
+
+    def esta_vacia(self):
+        return len(self.items) == 0
+
+    def ordenar_descendente(self):
+        self.items.sort(reverse=True)  # Ordena la pila de forma descendente
+
+    def imprimir(self):
+        print("Contenido de la pila:")
+        for elemento in self.items:
+            print(elemento)
+
+# Ejemplo de uso
+mi_pila = Pila()
+cadena = "hola mundo"
+for char in cadena:
+    mi_pila.apilar(char)
+
+mi_pila.ordenar_descendente()
+mi_pila.imprimir()
