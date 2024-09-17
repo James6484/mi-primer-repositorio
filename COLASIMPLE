@@ -1,0 +1,58 @@
+from cola2 import ColaSimple
+
+def encontrar_mayor(cola):
+    if cola.es_vacia():
+        print("La cola está vacía, no se puede encontrar el mayor número.")
+        return None
+    
+    # Sacamos el primer elemento como base para comparar y lo guardamos en la cola auxiliar
+    mayor = cola.dequeue()  
+    cola_auxiliar = ColaSimple(cola.max)
+    cola_auxiliar.enqueue(mayor)  # Guardamos el primer elemento en la cola auxiliar
+    
+    # Seguimos extrayendo elementos de la cola y encontramos el mayor
+    while not cola.es_vacia():
+        elemento = cola.dequeue()
+        if elemento > mayor:
+            mayor = elemento
+        cola_auxiliar.enqueue(elemento)  # Guardamos el elemento en la cola auxiliar
+    
+    # Restauramos la cola original desde la cola auxiliar
+    while not cola_auxiliar.es_vacia():
+        cola.enqueue(cola_auxiliar.dequeue())
+    
+    return mayor
+
+from cola2 import ColaSimple
+
+def encontrar_mayor(cola):
+    if cola.es_vacia():
+        print("La cola está vacía, no se puede encontrar el mayor número.")
+        return None, []
+    
+    
+    mayor = cola.dequeue()
+    cola_auxiliar = ColaSimple(cola.max)
+    cola_auxiliar.enqueue(mayor)  
+    
+    
+    numeros_pares = []
+    
+    
+    if mayor % 2 == 0:
+        numeros_pares.append(mayor)
+    
+    
+    while not cola.es_vacia():
+        elemento = cola.dequeue()
+        if elemento > mayor:
+            mayor = elemento
+        if elemento % 2 == 0:  
+            numeros_pares.append(elemento)
+        cola_auxiliar.enqueue(elemento)  
+    
+    
+    while not cola_auxiliar.es_vacia():
+        cola.enqueue(cola_auxiliar.dequeue())
+    
+    return mayor, numeros_pares
