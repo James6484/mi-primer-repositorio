@@ -1,0 +1,88 @@
+class Nodo:
+    def __init__(self, valor):
+        self.valor = valor
+        self.siguiente = None
+
+class ListaCircular:
+    def __init__(self):
+        self.p = None
+    
+    def es_vacia(self):
+        return self.p is None
+    
+    def agregar_final(self, valor):
+        nuevo_nodo = Nodo(valor)
+        
+        if self.es_vacia():
+            self.p = nuevo_nodo
+            nuevo_nodo.siguiente = self.p
+        else:
+            actual = self.p
+            while actual.siguiente != self.p:
+                actual = actual.siguiente
+            actual.siguiente = nuevo_nodo
+            nuevo_nodo.siguiente = self.p
+    
+    def agregar_inicio(self, valor):
+        nuevo_nodo = Nodo(valor)
+        
+        if self.es_vacia():
+            self.p = nuevo_nodo
+            nuevo_nodo.siguiente = self.p
+        else:
+            actual = self.p
+            while actual.siguiente != self.p:
+                actual = actual.siguiente
+            actual.siguiente = nuevo_nodo
+            nuevo_nodo.siguiente = self.p
+            self.p = nuevo_nodo
+    
+    def eliminar_inicio(self):
+        if self.es_vacia():
+            print("La lista está vacía, no se puede eliminar.")
+        elif self.p.siguiente == self.p:  # Solo un nodo en la lista
+            self.p = None
+        else:
+            actual = self.p
+            while actual.siguiente != self.p:
+                actual = actual.siguiente
+            self.p = self.p.siguiente
+            actual.siguiente = self.p
+    
+    def eliminar_final(self):
+        if self.es_vacia():
+            print("La lista está vacía, no se puede eliminar.")
+        elif self.p.siguiente == self.p:  # Solo un nodo en la lista
+            self.p = None
+        else:
+            actual = self.p
+            anterior = None
+            while actual.siguiente != self.p:
+                anterior = actual
+                actual = actual.siguiente
+            anterior.siguiente = self.p        
+    
+    def mostrar(self):
+        if self.es_vacia():
+            print("La lista circular está vacía")
+        else:
+            actual = self.p
+            while True:
+                print(f"-->{actual.valor}")
+                actual = actual.siguiente
+                if actual == self.p:
+                    break
+
+
+lista_circular1 = ListaCircular()
+lista_circular1.agregar_final("Ana")
+lista_circular1.agregar_final("Pedro")
+lista_circular1.mostrar()
+
+
+lista_circular1.eliminar_inicio()
+lista_circular1.mostrar()
+
+
+lista_circular1.eliminar_final()
+lista_circular1.mostrar()
